@@ -19,7 +19,10 @@
     Heading,
     Caption,
 
-    Spinner
+    Spinner,
+
+    theme,
+    colors
   } from "darkmode-components/src/index";
 
   import { onMount } from "svelte"
@@ -62,8 +65,14 @@
  -->
 <div style="min-height: 100vh;" class="w-full h-full flex flex-col justify-center items-center">
   <!-- Spinner -->
-  <Caption>Loading user account...</Caption>
-  <div class="mt-6">
-    <Spinner />
-  </div>
+	<div style="height: 100vh; background-color: {$theme == "dark" ? $colors.dark[0] : $colors.light[4]}" class="w-full flex justify-center items-center">
+		<!-- Branding -->
+		<div class="flex flex-col justify-center items-center">
+			<div class="flex mb-6 items-center">
+				<h1 style="font-family: Junegull; color: {$theme == "dark" ? $colors.light[2] : $colors.dark[2]}" class="text-3xl text-bold">wavees</h1>
+			</div>
+
+			<Spinner />
+		</div>
+	</div>
 </div>
