@@ -1,0 +1,9 @@
+/*
+!/locales
+!/package.json
+!/package-lock.json
+!/rollup.config.js
+!/src
+!/static
+!/postcss.config.js
+!/tailwind.config.js
