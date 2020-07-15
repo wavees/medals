@@ -2,7 +2,8 @@
   // Let's import application's styles
   import Tailwind from "../styles/tailwind.svelte";
 
-  // import
+	// import
+	import { locale, locales } from "svelte-i18n";
 	import { user } from "../config/stores/user.js";
 	
 	import { colors, theme, Spinner } from "darkmode-components/src/index"
@@ -10,6 +11,16 @@
 
   // Cookies instance
   const cookies = Cookie();
+
+	// Let's check our current language.
+	const language = cookies.get('_language');
+
+	locale.set("ru");
+	if (language) {
+		if ($locales.include(language)) {
+			locale.set(language);
+		};
+	};
 
 	// Let's check (and update if needed) our current
 	// theme

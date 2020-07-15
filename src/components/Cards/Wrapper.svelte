@@ -3,8 +3,10 @@
   import axios from "axios";
   import { onMount } from "svelte";
 
-  import { user } from "../config/stores/user";
-  import { api } from "../config/stores/global";
+  import { user } from "../../config/stores/user";
+  import { api } from "../../config/stores/global";
+
+  import { _ } from "svelte-i18n";
 
   // Importing components.
   import {
@@ -13,8 +15,8 @@
     colors
   } from "darkmode-components/src/index"
 
-  import Heading from "../components/Typo/Heading.svelte"
-  import Caption from "../components/Typo/Caption.svelte"
+  import Heading from "../Typo/Heading.svelte"
+  import Caption from "../Typo/Caption.svelte"
 
   let cardNumber = 0;
   let cards = [];
@@ -67,36 +69,40 @@
       let newCards = cards;
       newCards.push(medal);
 
-      cards = newCards;
+      // Let's now update our cards
+      // array.
+      if (newCards.length <= cardsNumber) {
+        cards = newCards;
+      };
     });
   };
+
+  // Let's now export some config
+  // variables...
+  export let cardsNumber = 2;
 </script>
 
-<div style="min-height: 100vh;" class="w-full h-full bg-gray-100 flex justify-center items-center">
+{#each cards as card}
+  <!-- 
+    @card Shitiest card 
+    Just a piece of shit, yeah
+  -->
+  <div style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); width: 16rem; height: 20rem;" class="rounded-lg mx-4 mt-6 lg:mt-6 flex justify-center items-center shadow-2xl text-white relative">
+    
+    <!-- Heading and icon -->
+    <div class="px-6">
+      <Heading>{@html card.title.replace("{name}", `<p class="inline text-green-300">${$user.current.username}</p>`)}</Heading>
+      <Caption>{card.subtitle}</Caption>
+    </div>
 
-  {#each cards as card}
-    <!-- 
-      @card Shitiest card 
-      Just a piece of shit, yeah
-    -->
-    <div style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); width: 16rem; height: 20rem;" class="rounded-lg mx-4 mt-6 lg:mt-6 flex justify-center items-center shadow-2xl text-white relative">
-      
-      <!-- Heading and icon -->
-      <div class="px-6">
-        <Heading>{@html card.title.replace("{name}", `<p class="inline text-green-300">${$user.current.username}</p>`)}</Heading>
-        <Caption>{card.subtitle}</Caption>
-      </div>
+    <!-- People agreed and assigment -->
+    <div class="absolute inset-x-0 bottom-0 w-full flex justify-between items-center px-6 py-4">
+      <p class="text-xs">{card.agreed.length} {card.agreed.length > 1 ? $_("cards.agreed.multi", { default: "agreed" }) : $_("cards.agreed.one", { default: "agreed" })}</p>
 
-      <!-- People agreed and assigment -->
-      <div class="absolute inset-x-0 bottom-0 w-full flex justify-between items-center px-6 py-4">
-        <p class="text-xs">{card.agreed.length} agreed</p>
-
-        <div class="flex items-center">
-          <p class="text-xs mx-2">{$user.current.username}</p>
-          <Avatar type="image" avatar={$user.current.avatar} size={1.8} />
-        </div>
+      <div class="flex items-center">
+        <p class="text-xs mx-2">{$user.current.username}</p>
+        <Avatar type="image" avatar={$user.current.avatar} size={1.8} />
       </div>
     </div>
-  {/each}
-
-</div>
+  </div>
+{/each}
