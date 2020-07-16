@@ -21,7 +21,8 @@ function createUserStore() {
       token: null,
       email: null,
       username: null,
-      avatar: null
+      avatar: null,
+      coins: 100
     },
 
     tokens: [],
@@ -73,6 +74,7 @@ function createUserStore() {
             object.current.email    = data.email;
             object.current.username = data.username;
             object.current.avatar   = data.avatar;
+            object.current.coins    = data.coins;
 
             object.tokens           = [token];
             
@@ -104,6 +106,7 @@ function createUserStore() {
               object.current.email    = data.email;
               object.current.username = data.username;
               object.current.avatar   = data.avatar;
+              object.current.coins    = data.coins;
 
               return object;
             });
@@ -186,7 +189,9 @@ async function loadProfile(token) {
         username: data.username,
 
         avatar: data.avatar,
-        token: token
+        token: token,
+
+        coins: data.coins
       };
 
       user.addProfile(profile);
@@ -247,7 +252,8 @@ function createCurrentUserStore() {
           object.username = data.username;
           object.email    = data.email;
           object.avatar   = data.avatar;
-          object.uid      = uid;
+          object.id       = id;
+          object.coins    = data.coins;
 
           object.loaded   = true;
 

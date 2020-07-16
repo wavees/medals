@@ -61,6 +61,13 @@
 </script>
 
 <!-- 
+  Page head
+ -->
+<svelte:head>
+  <title>Authorizing...</title>
+</svelte:head>
+
+<!-- 
   Main Layout
  -->
 <div style="min-height: 100vh;" class="w-full h-full flex flex-col justify-center items-center">

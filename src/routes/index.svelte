@@ -23,6 +23,13 @@
 </script>
 
 <!-- 
+  Page head
+ -->
+<svelte:head>
+  <title>Wavees Medals</title>
+</svelte:head>
+
+<!-- 
   Main Layout
  -->
 <main style="background-image: url('background.svg'); background-size: cover; background-position: center center; min-height: 100vh;" class="py-8 lg:py-0 relative w-full h-full flex justify-center items-center">
@@ -61,7 +68,7 @@
           <!-- User profile -->
           <div class="mb-6 float-center md:float-left flex flex-col md:flex-row justify-center items-center">
             <div class="flex">
-              <Avatar type="image" avatar={$user.current.avatar} size={4.5} />
+              <Avatar spinnerColor="#fff" type="image" avatar={$user.current.avatar} size={4.5} />
             
               <div class="mx-6 text-left">
                 <Heading size="20px">{$user.current.username}</Heading>
