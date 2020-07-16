@@ -15,6 +15,7 @@
 
   // Importing components
   import Card from "../../components/Cards/Card.svelte";
+  import Button from "../../components/Buttons/Button.svelte";
 
   import {
     Avatar,
@@ -50,6 +51,35 @@
     });
   });
 
+  // Cards categories...
+  let currentCategory = 1;
+  let cardsCategories = [
+    {
+      id: 1,
+      title: "Test"
+    },
+    {
+      id: 2,
+      title: "Test 2"
+    },
+    {
+      id: 3,
+      title: "Test 3"
+    },
+    {
+      id: 4,
+      title: "Test 4"
+    },
+    {
+      id: 5,
+      title: "Test 5"
+    },
+    {
+      id: 6,
+      title: "Test 6"
+    },
+  ];
+
   // Header items...
   let headerItems = [
     // About page
@@ -83,7 +113,7 @@
 <!-- 
   Main body.
  -->
-<main style="min-height: 100vh;" class="w-full relative">
+<main style="min-height: 100vh;" class="w-full relative bg-gray-200">
   <!-- Header -->
   <div class="absolute inset-x-0 top-0 w-full flex justify-between items-center px-6 md:px-8 lg:px-16 py-4 text-black">
     <!-- Logotype -->
@@ -113,45 +143,86 @@
   </div>
 
   <!-- Main content -->
-  <div class="flex flex-col md:flex-row pt-8 md:py-16 lg:pt-24">
-    <!-- Sidebar -->
-    <!-- <div class="w-full md:w-1/3 h-full bg-gray-200 rounded-lg">
+  <div class="flex flex-col pt-8 pb-8 md:pt-16 lg:pt-24">
+    <!-- Cards categories and search bar -->
+    <div class="w-full flex px-2 md:px-8">
+      <!-- Categories -->
+      <div class="w-full hidden md:flex justify-start items-center">
+        {#each cardsCategories as category}
+          <div style="border-radius: 1.5rem; cursor: pointer;" class="shadow-2xl mr-6 py-2 {currentCategory == category.id ? "bg-black text-white font-semibold px-8 py-3" : "text-gray-700 bg-white px-6"}">
+            {category.title}
+          </div> 
+        {/each}
 
-    </div> -->
-
-    <!-- Cards list -->
-    <div class="w-full px-2 md:px-8 lg:px-12">
-      <!-- Create new card promotion -->
-      <div style="height: 40vh;" class="w-full flex px-4 md:px-24">
-        <!-- Firsty button -->
-        <div class="mx-2 md:mx-4 hidden md:flex w-1/3">
-        
-        </div>
-
-        <!-- Post itself -->
-        <div class="w-full h-full rounded-lg bg-blue-300 shadow-2xl">
-      
-        </div>
-
-        <!-- Second Button -->
-        <div class="mx-2 md:mx-4 hidden md:flex w-1/3">
-        
+        <!-- "More" button -->
+        <div style="cursor: pointer;" class="mx-3 py-2 px-2">
+          <img src="./icons/more-horizontal.svg" alt="More Icon">
         </div>
       </div>
 
-      <!-- And all cards, that exists at the moment -->
-      <div class="mt-12">
-        <!-- Some interesting text -->
-        <div class="w-full text-center">
-          <Heading>Recent cards</Heading>
-          <Caption>Here you'll find the most recent cards!</Caption>
+      <!-- Search bar -->
+      <div class="w-full md:w-2/3 flex justify-center">
+        <input style="border-radius: 1.5rem;" class="bg-white w-full text-black py-2 px-8" type="text" placeholder="Search cards">
+        <!-- Icon -->
+      </div>
+    </div>
+
+    <!-- Cards list -->
+    <div class="w-full flex mt-4 md:mt-6 lg:mt-8">
+      <!-- Sidebar -->
+      <div class="w-1/5 bg-red-500 hidden md:block h-full px-2 py-6">
+        Sidebar goes brr
+      </div>
+      
+      <div class="w-full">
+        <!-- Closed beta test & create new card promotions -->
+        <div style="height: 45vh;" class="w-full flex">
+          <!-- Closed beta -->
+          <div style="border-radius: 2rem; background: linear-gradient(to right, #83a4d4, #b6fbff);" class="mx-4 flex h-full w-full relative">
+            <!-- Some textes -->
+            <div class="w-full h-full items-center px-4 md:px-6 md:pr-12">
+              <h1 class="mt-6 md:mt-8 lg:mt-16 text-2xl font-bold text-white">Wavees Medals is currently in closed beta.</h1>
+            
+              <!-- Buttons -->
+              <div class="mt-8 flex">
+                <!-- Lear more -->
+                <Button type="ghost" margin="mx-2">
+                  Learn more
+                </Button>
+
+                <!-- Subscribe for updates -->
+                <Button type="full" margin="mx-2">
+                  Subscribe for updates
+                </Button>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <div class="w-2/3">
+              <img style="height: 20rem; margin: -3.5rem 0;" class="absolute inset-y-0 right-0" src="./illustrations/1_en.svg" alt="Promotion">
+            </div>
+          </div>
+
+          <!-- Create new Card -->
+          <div style="border-radius: 2rem;" class="mx-4 h-full w-1/3 bg-red-500">
+          
+          </div>
         </div>
 
-        <!-- Cards themselves -->
-        <div class="mt-8 flex flex-wrap">
-          {#each cardsIds as cardId}
-            <Card id={cardId}></Card>
-          {/each}
+        <!-- And all cards, that exists at the moment -->
+        <div class="mt-12">
+          <!-- Some interesting text -->
+          <div class="w-full text-center">
+            <Heading>Recent cards</Heading>
+            <Caption>Here you'll find the most recent cards!</Caption>
+          </div>
+
+          <!-- Cards themselves -->
+          <div class="mt-8 flex flex-wrap">
+            {#each cardsIds as cardId}
+              <Card id={cardId}></Card>
+            {/each}
+          </div>
         </div>
       </div>
     </div>
