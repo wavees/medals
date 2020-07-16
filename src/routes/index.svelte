@@ -1,5 +1,7 @@
 <script>
   // Importing modules and components...
+  import { goto } from "@sapper/app";
+
   import { _ } from "svelte-i18n";
   import { user } from "../config/stores/user";
 
@@ -20,6 +22,36 @@
   import Button from "../components/Buttons/Button.svelte";
 
   import CardWrapper from "../components/Cards/Wrapper.svelte";
+
+  // Header items...
+  let headerItems = [
+    // About page
+    {
+      // Do we need to hide
+      // this in mobile version?
+      hide: true,
+      title: "header.aboutUs",
+      default: "About",
+
+      url: null
+    }, 
+    // Browse cards
+    {
+      hide: false,
+      title: "header.browseCards",
+      default: "Browse Cards",
+
+      url: '/browse'
+    },
+    // Create card
+    {
+      hide: true,
+      title: "header.createCard",
+      default: "Create my Card",
+
+      url: "/browse/create"
+    }
+  ];
 </script>
 
 <!-- 
@@ -40,14 +72,18 @@
 
     <!-- Header items -->
     <div class="flex text-sm md:text-xs">
-      <p class="mx-6 hidden md:block">{$_("header.aboutUs", { default: "About" })}</p>
-      <p class="mx-6">{$_("header.browseCards", { default: "Browse Cards" })}</p>
-      <p class="mx-6 hidden md:block">{$_("header.createCard", { default: "Create my Card" })}</p>
+      {#each headerItems as item}
+        <p on:click={(e) => {
+          if (item.url != null) {
+            goto(item.url);
+          };
+        }} style="cursor: pointer;" class="mx-6 { item.hide ? "hidden md:block" : ""}">{$_(item.title, { default: item.default })}</p>
+      {/each}
 
       { #if $user.tokens.length >= 1 }
         <p class="mx-6 hidden md:block">{$_("global.account", { default: "Account" })}</p>
       { :else }
-        <p class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
+        <p on:click={(e) => window.location.href = "https://account.wavees.co.vu/authorize/medals@wavees" } style="cursor: pointer;" class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
       { /if }
     </div>
   </div>
@@ -67,12 +103,12 @@
         <div class="mt-6">
           <!-- User profile -->
           <div class="mb-6 float-center md:float-left flex flex-col md:flex-row justify-center items-center">
-            <div class="flex">
+            <div class="flex items-center">
               <Avatar spinnerColor="#fff" type="image" avatar={$user.current.avatar} size={4.5} />
             
-              <div class="mx-6 text-left">
+              <div class="mx-6 text-left items-center">
                 <Heading size="20px">{$user.current.username}</Heading>
-                <Caption size="15px">{$user.current.email}</Caption>  
+                <Caption size="15px">{$user.current.email}</Caption>
               </div>
             </div>
 
@@ -109,8 +145,8 @@
 
         <!-- Some buttons... -->
         <div class="mt-16 md:mt-8 flex flex-col md:flex-row w-full justify-center items-center">
-          <Button margin="mx-4 my-4 md:my-0" type="ghost">{$_("cards.create", { default: "Create new Card" })}</Button>
-          <Button margin="mx-4 my-4 md:my-0" type="full">{$_("cards.browse", { default: "Browse all Cards" })}</Button>
+          <Button on:click={(e) => goto('/browse/create')} margin="mx-4 my-4 md:my-0" type="ghost">{$_("cards.create", { default: "Create new Card" })}</Button>
+          <Button on:click={(e) => goto('/browse')} margin="mx-4 my-4 md:my-0" type="full">{$_("cards.browse", { default: "Browse all Cards" })}</Button>
         </div>
       { :else }
         <div class="flex flex-col lg:flex-row justify-center items-center">
