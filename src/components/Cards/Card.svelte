@@ -85,7 +85,7 @@
 </script>
 
 <!-- Card itself -->
-<div style="background: linear-gradient(to right, #fd746c, #ff9068); width: 16rem; height: 20rem;" class="rounded-lg mx-4 mt-6 lg:mt-6 flex justify-center items-center shadow-2xl text-white relative">
+<div style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); width: 16rem; height: 20rem;" class="rounded-lg mx-4 mt-6 lg:mt-6 flex justify-center items-center shadow-2xl text-white relative">
   
   <!-- Loading state -->
   { #if !card.loaded }
