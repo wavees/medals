@@ -50,5 +50,5 @@
 </script>
 
 { #each cardsIds as cardId }
-  <Card margin="mx-4 lg:mt-6" id={cardId} />
+  <Card margin="mx-4 mt-6" id={cardId} />
 { /each }

@@ -232,18 +232,18 @@
           <!-- Closed beta -->
           <div style="border-radius: 2rem; background: linear-gradient(to right, #ffafbd, #ffc3a0);" class="lg:mx-4 my-4 lg:my-0 py-6 lg:py-8 flex h-full w-full relative">
             <!-- Some textes -->
-            <div class="w-full h-full items-center px-6 md:px-6 md:pr-12">
+            <div class="w-full h-full items-center px-6 md:pr-12">
               <h1 class="mt-6 md:mt-8 lg:mt-12 text-xl md:text-2xl font-bold text-white">{$_("browser.promotion.big.title", { default: "Wavees Medals is currently in closed beta." })}</h1>
             
               <!-- Buttons -->
               <div class="mt-8 flex">
                 <!-- Lear more -->
-                <Button type="ghost" margin="mx-2">
+                <Button type="ghost" margin="mx-2 hidden md:block">
                   {$_("browser.promotion.big.button.learnMore", { default: "Learn more" })}
                 </Button>
 
                 <!-- Subscribe for updates -->
-                <Button type="full" margin="mx-2">
+                <Button type="full" fullWidth={true} margin="mx-2">
                   {$_("browser.promotion.big.button.subscribe", { default: "Subscribe for updates" })}
                 </Button>
               </div>
@@ -256,14 +256,14 @@
           </div>
 
           <!-- Learn more -->
-          <div style="border-radius: 2rem; height: auto; background: linear-gradient(to right, #36d1dc, #5b86e5);" class="px-4 md:hidden lg:block w-full md:w-1/3 lg:mx-4 my-4 lg:my-0">
+          <div style="border-radius: 2rem; height: auto; background: linear-gradient(to right, #36d1dc, #5b86e5);" class="px-6 md:hidden lg:block w-full md:w-1/3 lg:mx-4 my-4 lg:my-0 py-6 lg:py-0">
             <div class="text-white mt-6 md:mt-8">
               <h1 class="text-xl md:text-2xl font-bold">{$_("browser.promotion.small.title", { default: "Learn more about Medals" })}</h1>
               <p class="text-sm">{$_("browser.promotion.small.subtitle", { default: "Let's learn together! Learn something new about this service and how it works." })}</p>
             </div>
 
-            <div class="mt-6">
-              <Button type="full">
+            <div class="mt-6 px-6 md:px-0">
+              <Button fullWidth={true} type="full">
                 {$_("browser.promotion.small.button", { default: "Learn More" })}
               </Button>
             </div>
@@ -279,9 +279,9 @@
           </div>
 
           <!-- Cards themselves -->
-          <div class="mt-8 flex flex-wrap px-4">
+          <div class="mt-8 w-full justify-center md:justify-start flex flex-wrap px-4">
             {#each cardsIds as cardId}
-              <Card margin="mr-4 mt-6" id={cardId}></Card>
+              <Card margin="md:mr-2 lg:mr-4 mt-6" id={cardId}></Card>
             {/each}
           </div>
         </div>
