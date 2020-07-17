@@ -16,6 +16,11 @@
 
   // onMount event
   onMount(() => {
+    // Let's firstly clear our
+    // cards store.
+    cards.clearStore();
+
+    // And now let's get medals list...
     const uid   = $user.current.id;
 
     // And now let's get our cards..
@@ -45,5 +50,5 @@
 </script>
 
 { #each cardsIds as cardId }
-  <Card id={cardId} />
+  <Card margin="mx-4 lg:mt-6" id={cardId} />
 { /each }

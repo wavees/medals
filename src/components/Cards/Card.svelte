@@ -20,7 +20,15 @@
 
   // Let's firstly export some needed variables.
   export let size = "ordinary";
+  export let margin = "mx-4";
   export let id;
+
+  // Card object.
+  // We'll use it to store some
+  // information about this card.
+  let card = {
+    loaded: false
+  };
 
   // onMount event (Here
   // we'll gather information
@@ -71,21 +79,15 @@
           card.creator = {};
         };
 
+        card.uses        = object[id].uses;
         card.maximumUses = object[id].maximumUses;
       };
     };
   });
-
-  // Card object.
-  // We'll use it to store some
-  // information about this card.
-  let card = {
-    loaded: false
-  };
 </script>
 
 <!-- Card itself -->
-<div style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); width: 16rem; height: 20rem;" class="rounded-lg mx-4 mt-6 lg:mt-6 flex justify-center items-center shadow-2xl text-white relative">
+<div style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); width: 16rem; height: 20rem;" class="rounded-lg {margin} flex justify-center items-center shadow-2xl text-white relative">
   
   <!-- Loading state -->
   { #if !card.loaded }
@@ -116,14 +118,26 @@
           { /if }
         </div>
       { :else if card.type == "primary" }
-        <!-- 
-          And here we are going to 
-          show this card creator. -->
-        {#if card.creator.avatar }
-          <Avatar type="image" avatar={card.creator.avatar} size={1.8} />
-        { :else }
-          <Avatar type="word" word={card.creator.username} />
-        {/if}
+        <div class="relative w-full flex justify-center items-center">
+          <!-- Card uses -->
+          <div class="absolute inset-y-0 left-0 py-2">
+            <p class="text-xs">{card.uses} {$_("cards.uses", { default: "uses" })}</p>
+          </div>
+
+          <!-- 
+            And here we are going to 
+            show this card creator. -->
+          {#if card.creator.avatar }
+            <Avatar type="image" avatar={card.creator.avatar} size={2} />
+          { :else }
+            <Avatar type="word" word={card.creator.username} size={2} />
+          {/if}
+
+          <!-- Card's maximum uses -->
+          <div class="absolute inset-y-0 right-0 py-2">
+            <p class="text-xs">{$_("cards.maximumUses", { default: "positions" })} {card.maximumUses == 0 ? "∞" : card.maximumUses}</p>
+          </div>
+        </div>
       { /if }
     </div>
   { /if }

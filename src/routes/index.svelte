@@ -1,6 +1,9 @@
 <script>
   // Importing modules and components...
   import { goto } from "@sapper/app";
+  import { onMount } from "svelte"
+
+  import { fade } from "svelte/transition";
 
   import { _ } from "svelte-i18n";
   import { user } from "../config/stores/user";
@@ -52,6 +55,16 @@
       url: "/browse/create"
     }
   ];
+
+  // Small transition animation
+  // (I'll change it later)
+  let pageLoaded = false;
+
+  onMount(() => {
+    setTimeout(() => {
+      pageLoaded = true;
+    }, 50);
+  });
 </script>
 
 <!-- 
@@ -65,10 +78,15 @@
   Main Layout
  -->
 <main style="background-image: url('background.svg'); background-size: cover; background-position: center center; min-height: 100vh;" class="py-8 lg:py-0 relative w-full h-full flex justify-center items-center">
+  <!-- Small page transition effect (I'll change it later, probably) -->
+  {#if !pageLoaded}
+    <div out:fade class="absolute w-full h-full bg-white" style="z-index: 999;"></div>
+  {/if}
+
   <!-- Header -->
   <div class="absolute inset-x-0 top-0 w-full flex justify-between items-center px-6 md:px-8 lg:px-16 py-4 text-white">
     <!-- Logotype -->
-		<h1 style="font-family: Junegull;" class="text-xl md:text-sm text-bold">{$_("global.logotype", { default: "medals" })}</h1>
+		<h1 style="font-family: Junegull; cursor: pointer;" class="text-xl text-bold">{$_("global.logotype", { default: "medals" })}</h1>
 
     <!-- Header items -->
     <div class="flex text-sm md:text-xs">

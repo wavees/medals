@@ -21,6 +21,20 @@ function createCardsStore() {
   return {
     subscribe,
 
+    clearStore: () => {
+      // First of all, we need to
+      // clear cardsIds
+      cardsIds = [];
+
+      // And now we need to clear
+      // this store.
+      update((object) => {
+        object = store;
+
+        return object;
+      });
+    },
+
     // Method, that'll gather
     // information about cards.
     gatherInformation: (id) => {
@@ -87,7 +101,11 @@ function createCardsStore() {
             // It's a primary card, so we need to get
             // some information about it's creator.
             let uid = data.creatorId;
-            card.type = "primary";
+
+            card.type        = "primary";
+            
+            card.uses        = data.uses == null ? 0 : data.uses;
+            card.maximumUses = data.maximumUses == null ? 0 : data.maximumUses;
 
             axios.get(`${url}/${version}/user/${uid}`)
             .then((response) => {
