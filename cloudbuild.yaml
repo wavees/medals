@@ -1,22 +1,23 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west4-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'us-west1-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA', '.']
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west4-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA']
-  # Deploy container image to Cloud Run
+    args: ['push', 'us-west1-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA']
+  
+  # Deploy container image to Cloud Run (Region: europe-west1)
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
     - 'run'
     - 'deploy'
     - 'medals'
     - '--image'
-    - 'europe-west4-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA'
+    - 'us-west1-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA'
     - '--region'
-    - 'europe-west4'
+    - 'europe-west1'
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
 images:
-  - 'europe-west4-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA'
+  - 'us-west1-docker.pkg.dev/$PROJECT_ID/images/medals:$COMMIT_SHA'
