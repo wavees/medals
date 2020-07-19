@@ -6,7 +6,9 @@
   import { fade } from "svelte/transition";
 
   import { _ } from "svelte-i18n";
+
   import { user } from "../config/stores/user";
+  import { general } from "../config/stores/global";
 
   // Cookies manager
   import Cookie from "cookie-universal";
@@ -101,7 +103,7 @@
       { #if $user.tokens.length >= 1 }
         <p class="mx-6 hidden md:block">{$_("global.account", { default: "Account" })}</p>
       { :else }
-        <p on:click={(e) => window.location.href = "https://account.wavees.co.vu/authorize/medals@wavees" } style="cursor: pointer;" class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
+        <p on:click={(e) => window.location.href = `https://account.${$general.globalURL}/authorize/medals@wavees` } style="cursor: pointer;" class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
       { /if }
     </div>
   </div>
