@@ -14,7 +14,7 @@ And then just run application in development mode, using:
 
     npm run dev
  
- ### Bulding
+ ### Building
  We are using Sapper and Svelte for our application. So, you'll need to know a little bit more information about this frameworks. If you're more or less familiar with these frameworks, then you just need to run this:
  
 
