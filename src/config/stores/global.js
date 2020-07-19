@@ -10,8 +10,8 @@ const general =
 readable({
   // Site url
   // Hmm, just site url, isn't it?
-  globalURL: "wavees.co.vu",
-  currentURL: "account.wavees.co.vu"
+  globalURL: "wavees.ml",
+  currentURL: "medals.wavees.ml"
 });
 
 export { general };
