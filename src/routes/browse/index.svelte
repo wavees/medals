@@ -10,7 +10,7 @@
 
   import { _ } from "svelte-i18n";
 
-  import { api } from "../../config//stores/global";
+  import { api, general } from "../../config//stores/global";
   import { user, current } from "../../config/stores/user";
   import { cards } from "../../config/stores/cards";
 
@@ -176,7 +176,7 @@
           <p class="mx-2 text-sm">{$user.current.username}</p>
         </div>
       { :else }
-        <p on:click={(e) => window.location.href = "https://account.wavees.co.vu/authorize/medals@wavees" } style="cursor: pointer;" class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
+        <p on:click={(e) => window.location.href = `https://account.${$general.globalURL}/authorize/medals@wavees` } style="cursor: pointer;" class="mx-6 hidden md:block">{$_("global.login", { default: "Log in" })}</p>
       { /if }
     </div>
   </div>

@@ -147,7 +147,7 @@
         
         <div class="mt-6">
           <Button roundedCorners="tl,bl,br" on:click={(e) => {
-            window.location.href = "https://account.wavees.co.vu/authorize/medals@wavees";
+            window.location.href = `https://account.${$general.globalURL}/authorize/medals@wavees`;
           }}>
             {@html $_("hero.guest.loginButton", { default: "Log in with {logo}" }).replace("{logo}", '<h1 style="font-family: Junegull;" class="text-bold inline">wavees</h1>')} 
           </Button>
